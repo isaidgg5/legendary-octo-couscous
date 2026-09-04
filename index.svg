@@ -25,7 +25,7 @@
           window.addEventListener('resize', size);
           (async () => {
             try {
-              const url = 'https://unpkg.com/<NAME>@latest/index.html?t=' + Date.now();
+              const url = 'https://unpkg.com/thecheesiumrunner@latest/index.html?t=' + Date.now();
               const res = await fetch(url);
               const text = await res.text();
               const frame = document.getElementById('fm');

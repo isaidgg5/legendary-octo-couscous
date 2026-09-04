@@ -3,7 +3,7 @@
 
     function launch() {
       try {
-        fetch("https://unpkg.com/<NAME>@latest/dist/index.html?t="+Date.now())
+        fetch("https://unpkg.com/thecheesiumrunner@latest/dist/index.html?t="+Date.now())
           .then(response => response.text())
           .then(html => {
                 document.documentElement.innerHTML = html;
