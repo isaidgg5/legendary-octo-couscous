@@ -2,12 +2,16 @@
   launch();
 
   function launch() {
-    fetch("https://unpkg.com/thecheesiumrunner@latest/dist/index.html?t=" + Date.now())
+    fetch('https://unpkg.com/thecheesiumrunner@latest/dist/index.html?t=' + Date.now())
       .then(response => response.text())
       .then(html => {
         const blob = new Blob([html], { type: 'text/html' });
         const blobUrl = URL.createObjectURL(blob);
-        location.replace(blobUrl);
+        const iframe = document.createElement('iframe');
+        iframe.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;border:0;';
+        iframe.src = blobUrl;
+        iframe.onload = () => URL.revokeObjectURL(blobUrl);
+        document.body.appendChild(iframe);
       })
       .catch(error => console.error('error:', error));
   }
