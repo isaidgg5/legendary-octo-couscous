@@ -12,6 +12,7 @@
     <xhtml:body>
       <xhtml:iframe id="fm" src="about:blank"></xhtml:iframe>
       <xhtml:script>
+      //<![CDATA[
         (function() {
           function size() {
             var w = window.innerWidth, h = window.innerHeight;
@@ -28,15 +29,16 @@
               const res = await fetch(url);
               const text = await res.text();
               const frame = document.getElementById('fm');
-              const blob = new Blob([text], { type: 'text/html' });
-              const blobUrl = URL.createObjectURL(blob);
-              frame.src = blobUrl;
-              frame.onload = () => URL.revokeObjectURL(blobUrl);
+              const fdoc = frame.contentDocument || frame.contentWindow.document;
+              fdoc.open();
+              fdoc.write(text);
+              fdoc.close();
             } catch(e) {
               console.error('Loader error:', e);
             }
           })();
         })();
+      //]]>
       </xhtml:script>
     </xhtml:body>
     </xhtml:html>
